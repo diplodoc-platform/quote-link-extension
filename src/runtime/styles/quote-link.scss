@@ -1,0 +1,60 @@
+$linkInsideBlockQuote: 'a[data-quotelink\="true"]';
+
+.yfm-quote-link {
+    position: relative;
+
+    padding-top: 4px;
+    padding-right: 12px;
+    padding-bottom: 4px;
+
+    border-radius: 5px;
+
+    --yfm-quote-link-background: rgb(242, 242, 242);
+    --yfm-quote-link-background-hover: rgba(0, 0, 0, 0.05);
+
+    p {
+        // restrict the paragraphs width to make link working when clicking on the empty space near the contents
+        max-width: max-content;
+    }
+
+    > p > #{$linkInsideBlockQuote} {
+        position: absolute;
+        z-index: 0;
+
+        cursor: pointer;
+
+        // change the color, because we can't change opacity if we want to add background to the link
+        /* stylelint-disable-next-line declaration-no-important */
+        color: transparent!important;
+        background-color: var(--yfm-quote-link-background, rgb(242, 242, 242));
+
+        inset: 0;
+
+        + br {
+            display: none;
+        }
+
+        &:hover {
+            background-color: var(--yfm-quote-link-background-hover, rgba(0, 0, 0, 0.05));
+        }
+    }
+
+    > p:has(> #{$linkInsideBlockQuote}) {
+        // remove relative position from paragraphs with quote links
+        position: static;
+    }
+
+    > p:has(> #{$linkInsideBlockQuote}:only-child) {
+        // remove margin from paragraphs, which contain only the hidden link
+        margin: 0;
+    }
+}
+
+.yfm-cut .yfm-cut-content:has(> .yfm-quote-link:only-child) {
+    padding: 0;
+
+    > .yfm-quote-link {
+        padding-top: 8px;
+        padding-left: 28px;
+    }
+}
