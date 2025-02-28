@@ -1,7 +1,9 @@
 import type MarkdownIt from 'markdown-it';
 import type Core from 'markdown-it/lib/parser_core';
 
-import {ClassNames, ENV_FLAG_NAME, TokenType} from './const';
+import {parseMdAttrs} from '@diplodoc/utils';
+
+import {ClassNames, ENV_FLAG_NAME, QUOTE_LINK_ATTR, TokenType} from './const';
 import {matchBlockquote, matchLinkAtInlineStart} from './helpers';
 
 export const quoteLinkPlugin: MarkdownIt.PluginSimple = (md) => {
@@ -24,7 +26,32 @@ export const quoteLinkPlugin: MarkdownIt.PluginSimple = (md) => {
                 continue;
             }
 
-            if (linkMatch.openToken.attrIndex('data-quotelink') !== -1) {
+            // if attr not exist, parse markup after link
+            if (linkMatch.openToken.attrIndex(QUOTE_LINK_ATTR) === -1) {
+                const nextTextToken = inlineToken.children?.[linkMatch.closeTokenIndex + 1];
+                if (!nextTextToken || nextTextToken.type !== 'text') {
+                    continue;
+                }
+
+                const res = parseMdAttrs(
+                    md,
+                    nextTextToken.content,
+                    0,
+                    nextTextToken.content.length,
+                );
+
+                if (!res) {
+                    continue;
+                }
+
+                nextTextToken.content = nextTextToken.content.slice(res.pos);
+
+                if (res.attrs[QUOTE_LINK_ATTR]?.length) {
+                    linkMatch.openToken.attrSet(QUOTE_LINK_ATTR, res.attrs[QUOTE_LINK_ATTR][0]);
+                }
+            }
+
+            if (linkMatch.openToken.attrIndex(QUOTE_LINK_ATTR) !== -1) {
                 quoteMatch.openToken.type = TokenType.QuoteLinkOpen;
                 quoteMatch.openToken.attrSet('class', ClassNames.QuoteLink);
 

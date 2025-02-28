@@ -43,7 +43,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@diplodoc/utils": "^2.0.1"
+    "@diplodoc/utils": "^2.1.0"
   },
   "devDependencies": {
     "@diplodoc/lint": "^1.2.0",

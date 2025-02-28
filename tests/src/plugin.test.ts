@@ -1,13 +1,16 @@
 import transform from '@diplodoc/transform';
 import dd from 'ts-dedent';
 import MarkdownIt from 'markdown-it';
-import attrs from 'markdown-it-attrs';
 
 import * as quoteLinkExtension from '../../src/plugin';
 
 const html = (text: string, opts?: quoteLinkExtension.TransformOptions) => {
     const {result} = transform(text, {
-        plugins: [quoteLinkExtension.transform({bundle: false, ...opts})],
+        plugins: [
+            quoteLinkExtension.transform({bundle: false, ...opts}),
+            // disable markdown-it-attrs
+            (md) => md.core.ruler.disable('curly_attributes'),
+        ],
     });
 
     return result.html;
@@ -23,7 +26,6 @@ const meta = (text: string, opts?: quoteLinkExtension.TransformOptions) => {
 
 const parse = (text: string, opts?: quoteLinkExtension.TransformOptions) => {
     const md = new MarkdownIt().use(quoteLinkExtension.transform({bundle: false, ...opts}));
-    md.use(attrs, {leftDelimiter: '{', rightDelimiter: '}'});
     return md.parse(text, {});
 };
 
