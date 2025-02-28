@@ -2,44 +2,36 @@ import type MarkdownIt from 'markdown-it';
 import type Core from 'markdown-it/lib/parser_core';
 
 import {ClassNames, ENV_FLAG_NAME, TokenType} from './const';
-import {findCloseTokenIdx, matchOpenToken} from './helpers';
+import {matchBlockquote, matchLinkAtInlineStart} from './helpers';
 
 export const quoteLinkPlugin: MarkdownIt.PluginSimple = (md) => {
     const plugin: Core.RuleCore = (state) => {
-        const tokens = state.tokens;
-        let i = 0;
+        const {tokens} = state;
 
-        while (i < tokens.length) {
-            const match = matchOpenToken(tokens, i);
+        for (let i = 0; i < tokens.length; i++) {
+            const quoteMatch = matchBlockquote(tokens, i);
+            if (!quoteMatch) {
+                continue;
+            }
 
-            if (match) {
-                const closeTokenIdx = findCloseTokenIdx(tokens, i + 1);
+            if (tokens[i + 1]?.type !== 'paragraph_open' || !tokens[i + 2]) {
+                continue;
+            }
 
-                if (!closeTokenIdx) {
-                    i += 1;
-                    continue;
-                }
+            const inlineToken = tokens[i + 2];
+            const linkMatch = matchLinkAtInlineStart(inlineToken);
+            if (!linkMatch) {
+                continue;
+            }
 
-                if (
-                    tokens[i + 1]?.type === 'paragraph_open' &&
-                    tokens[i + 2]?.type === 'inline' &&
-                    tokens[i + 2].children?.[0]?.type === 'link_open' &&
-                    tokens[i + 2].children?.[0]?.attrs?.some(
-                        (attr) => attr[0] === 'data-quotelink' && attr[1] === 'true',
-                    )
-                ) {
-                    tokens[i].type = TokenType.QuoteLinkOpen;
-                    tokens[i].attrSet('class', ClassNames.QuoteLink);
+            if (linkMatch.openToken.attrIndex('data-quotelink') !== -1) {
+                quoteMatch.openToken.type = TokenType.QuoteLinkOpen;
+                quoteMatch.openToken.attrSet('class', ClassNames.QuoteLink);
 
-                    tokens[closeTokenIdx].type = TokenType.QuoteLinkClose;
+                quoteMatch.closeToken.type = TokenType.QuoteLinkClose;
 
-                    state.env ??= {};
-                    state.env[ENV_FLAG_NAME] = true;
-                }
-
-                i++;
-            } else {
-                i++;
+                state.env ??= {};
+                state.env[ENV_FLAG_NAME] = true;
             }
         }
     };
