@@ -31,16 +31,17 @@ describe('Quote link extension - plugin', () => {
     it('should render single quote link', () => {
         expect(
             html(dd`
-            > [Quote link](https://ya.ru){data-quotelink="true"}
+            > [Quote link](https://ya.ru){data-quotelink}
             >
             > quote link text
             `),
         ).toBe(
-            `<blockquote class="yfm-quote-link">
-<p><a href="https://ya.ru" data-quotelink="true">Quote link</a></p>
-<p>quote link text</p>
-</blockquote>
-`,
+            dd`
+            <blockquote class="yfm-quote-link">
+            <p><a href="https://ya.ru" data-quotelink>Quote link</a></p>
+            <p>quote link text</p>
+            </blockquote>
+            ` + '\n',
         );
     });
 
@@ -56,15 +57,16 @@ describe('Quote link extension - plugin', () => {
             > > nested link text
             `),
         ).toBe(
-            `<blockquote class="yfm-quote-link">
-<p><a href="https://ya.ru" data-quotelink="true">Quote link</a></p>
-<p>quote link text</p>
-<blockquote class="yfm-quote-link">
-<p><a href="https://nested.ru" data-quotelink="true">Nested</a></p>
-<p>nested link text</p>
-</blockquote>
-</blockquote>
-`,
+            dd`
+            <blockquote class="yfm-quote-link">
+            <p><a href="https://ya.ru" data-quotelink="true">Quote link</a></p>
+            <p>quote link text</p>
+            <blockquote class="yfm-quote-link">
+            <p><a href="https://nested.ru" data-quotelink="true">Nested</a></p>
+            <p>nested link text</p>
+            </blockquote>
+            </blockquote>
+            ` + '\n',
         );
     });
 
@@ -80,15 +82,16 @@ describe('Quote link extension - plugin', () => {
             > > simple quote text
             `),
         ).toBe(
-            `<blockquote class="yfm-quote-link">
-<p><a href="https://ya.ru" data-quotelink="true">Quote link</a></p>
-<p>quote link text</p>
-<blockquote>
-<p>Simple quote</p>
-<p>simple quote text</p>
-</blockquote>
-</blockquote>
-`,
+            dd`
+            <blockquote class="yfm-quote-link">
+            <p><a href="https://ya.ru" data-quotelink="true">Quote link</a></p>
+            <p>quote link text</p>
+            <blockquote>
+            <p>Simple quote</p>
+            <p>simple quote text</p>
+            </blockquote>
+            </blockquote>
+            ` + '\n',
         );
 
         expect(
@@ -102,15 +105,16 @@ describe('Quote link extension - plugin', () => {
             > > simple quote text
             `),
         ).toBe(
-            `<blockquote class="yfm-quote-link">
-<p><a href="https://ya.ru" data-quotelink="true">Quote link</a></p>
-<p>quote link text</p>
-<blockquote>
-<p><a href="https://nested.ru">Simple quote with link</a></p>
-<p>simple quote text</p>
-</blockquote>
-</blockquote>
-`,
+            dd`
+            <blockquote class="yfm-quote-link">
+            <p><a href="https://ya.ru" data-quotelink="true">Quote link</a></p>
+            <p>quote link text</p>
+            <blockquote>
+            <p><a href="https://nested.ru">Simple quote with link</a></p>
+            <p>simple quote text</p>
+            </blockquote>
+            </blockquote>
+            ` + '\n',
         );
     });
 
@@ -126,15 +130,16 @@ describe('Quote link extension - plugin', () => {
             > > nested quote link text
             `),
         ).toBe(
-            `<blockquote>
-<p>Simple quote</p>
-<p>simple quote text</p>
-<blockquote class="yfm-quote-link">
-<p><a href="https://nested.ru" data-quotelink="true">Nested quote link</a></p>
-<p>nested quote link text</p>
-</blockquote>
-</blockquote>
-`,
+            dd`
+            <blockquote>
+            <p>Simple quote</p>
+            <p>simple quote text</p>
+            <blockquote class="yfm-quote-link">
+            <p><a href="https://nested.ru" data-quotelink="true">Nested quote link</a></p>
+            <p>nested quote link text</p>
+            </blockquote>
+            </blockquote>
+            ` + '\n',
         );
 
         expect(
@@ -148,24 +153,26 @@ describe('Quote link extension - plugin', () => {
             > > nested quote link text
             `),
         ).toBe(
-            `<blockquote>
-<p><a href="https://ya.ru">Simple link</a></p>
-<p>simple link text</p>
-<blockquote class="yfm-quote-link">
-<p><a href="https://nested.ru" data-quotelink="true">Nested quote link</a></p>
-<p>nested quote link text</p>
-</blockquote>
-</blockquote>
-`,
+            dd`
+            <blockquote>
+            <p><a href="https://ya.ru">Simple link</a></p>
+            <p>simple link text</p>
+            <blockquote class="yfm-quote-link">
+            <p><a href="https://nested.ru" data-quotelink="true">Nested quote link</a></p>
+            <p>nested quote link text</p>
+            </blockquote>
+            </blockquote>
+            ` + '\n',
         );
     });
 
     it('should render simple quote without link', () => {
         expect(html('> quote text')).toBe(
-            `<blockquote>
-<p>quote text</p>
-</blockquote>
-`,
+            dd`
+            <blockquote>
+            <p>quote text</p>
+            </blockquote>
+            ` + '\n',
         );
 
         expect(
@@ -175,11 +182,12 @@ describe('Quote link extension - plugin', () => {
         > link text
         `),
         ).toBe(
-            `<blockquote>
-<p><a href="https://ya.ru">Simple link</a></p>
-<p>link text</p>
-</blockquote>
-`,
+            dd`
+            <blockquote>
+            <p><a href="https://ya.ru">Simple link</a></p>
+            <p>link text</p>
+            </blockquote>
+            ` + '\n',
         );
     });
 
@@ -234,7 +242,7 @@ describe('Quote link extension - plugin', () => {
     it('should parse markup with quote link to token stream', () => {
         expect(
             parse(dd`
-            > [Quote link](https://ya.ru){data-quotelink="true"}
+            > [Quote link](https://ya.ru){data-quotelink="true"} content after qoute link
             >
             > quote link text
             `),
