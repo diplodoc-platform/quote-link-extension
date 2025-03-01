@@ -17,6 +17,12 @@ $linkInsideBlockQuote: 'a[data-quotelink\="true"]';
         max-width: max-content;
     }
 
+    * {
+        // add possibility to copy the contents of the link elements and click interactive elements
+        position: relative;
+        z-index: 1;
+    }
+
     > p > #{$linkInsideBlockQuote} {
         position: absolute;
         z-index: 0;
@@ -25,7 +31,7 @@ $linkInsideBlockQuote: 'a[data-quotelink\="true"]';
 
         // change the color, because we can't change opacity if we want to add background to the link
         /* stylelint-disable-next-line declaration-no-important */
-        color: transparent!important;
+        color: transparent !important;
         background-color: var(--yfm-quote-link-background, rgb(242, 242, 242));
 
         inset: 0;
