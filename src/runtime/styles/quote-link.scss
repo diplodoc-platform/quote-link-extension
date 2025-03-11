@@ -34,6 +34,8 @@ $linkInsideBlockQuote: 'a[data-quotelink\="true"]';
         color: transparent !important;
         background-color: var(--yfm-quote-link-background, rgb(242, 242, 242));
 
+        border-radius: var(--g-border-radius-s);
+
         inset: 0;
 
         + br {
