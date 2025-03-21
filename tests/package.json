@@ -16,8 +16,5 @@
     "jest-serializer-html": "^7.1.0",
     "ts-dedent": "^2.2.0",
     "typescript": "^5.5.4"
-  },
-  "dependencies": {
-    "markdown-it-attrs": "^4.3.1"
   }
 }

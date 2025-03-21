@@ -9,3 +9,5 @@ export const TokenType = {
 export const ClassNames = {
     QuoteLink: 'yfm-quote-link',
 } as const;
+
+export const QUOTE_LINK_ATTR = 'data-quotelink';
