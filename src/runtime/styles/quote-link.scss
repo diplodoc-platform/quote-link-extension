@@ -3,6 +3,8 @@ $linkInsideBlockQuote: 'a[data-quotelink\="true"]';
 .yfm-quote-link {
     position: relative;
 
+    overflow: hidden;
+
     padding-top: 4px;
     padding-right: 12px;
     padding-bottom: 4px;
@@ -33,6 +35,9 @@ $linkInsideBlockQuote: 'a[data-quotelink\="true"]';
         /* stylelint-disable-next-line declaration-no-important */
         color: transparent !important;
         background-color: var(--yfm-quote-link-background, rgb(242, 242, 242));
+
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
 
         inset: 0;
 
