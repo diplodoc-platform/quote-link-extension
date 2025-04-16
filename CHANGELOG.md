@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/diplodoc-platform/quote-link-extension/compare/v0.1.1...v0.1.2) (2025-04-16)
+
+
+### Bug Fixes
+
+* **styles:** fix clipboard button position ([#8](https://github.com/diplodoc-platform/quote-link-extension/issues/8)) ([f066023](https://github.com/diplodoc-platform/quote-link-extension/commit/f0660235a578521146b935529b2dc4085084f71d))
+
 ## [0.1.1](https://github.com/diplodoc-platform/quote-link-extension/compare/v0.1.0...v0.1.1) (2025-03-26)
 
 
