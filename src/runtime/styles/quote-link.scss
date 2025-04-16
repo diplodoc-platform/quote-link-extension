@@ -25,6 +25,10 @@ $linkInsideBlockQuote: 'a[data-quotelink\="true"]';
         z-index: 1;
     }
 
+    .yfm-clipboard-button {
+        position: absolute;
+    }
+
     > p > #{$linkInsideBlockQuote} {
         position: absolute;
         z-index: 0;
