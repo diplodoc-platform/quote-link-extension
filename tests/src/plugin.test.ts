@@ -47,6 +47,26 @@ describe('Quote link extension - plugin', () => {
         );
     });
 
+    it('should render single quote link with several paragraphs', () => {
+        expect(
+            html(dd`
+            > [Quote link](https://ya.ru){data-quotelink}
+            >
+            > quote link paragraph 1
+            >
+            > quote link paragraph 2
+            `),
+        ).toBe(
+            dd`
+            <blockquote class="yfm-quote-link">
+            <p><a href="https://ya.ru" data-quotelink>Quote link</a></p>
+            <p>quote link paragraph 1</p>
+            <p>quote link paragraph 2</p>
+            </blockquote>
+            ` + '\n',
+        );
+    });
+
     it('should render nested quote link', () => {
         expect(
             html(dd`
@@ -191,6 +211,42 @@ describe('Quote link extension - plugin', () => {
             </blockquote>
             ` + '\n',
         );
+    });
+
+    it('should create separate paragraph for the quote link', () => {
+        expect(
+            html(dd`
+            > [Quote link](https://ya.ru){data-quotelink}
+            > quote link text
+            `),
+        ).toBe(
+            dd`
+            <blockquote class="yfm-quote-link">
+            <p><a href="https://ya.ru" data-quotelink>Quote link</a></p>
+            <p>quote link text</p>
+            </blockquote>
+            ` + '\n',
+        );
+    });
+
+    it('should create separate paragraph for the quote link if it has other paragraphs', () => {
+        const markup = dd`
+            > [Quote link](https://ya.ru){data-quotelink}
+            > quote link first paragraph
+            >
+            > quote link second paragraph
+            `;
+        expect(html(markup)).toBe(
+            dd`
+            <blockquote class="yfm-quote-link">
+            <p><a href="https://ya.ru" data-quotelink>Quote link</a></p>
+            <p>quote link first paragraph</p>
+            <p>quote link second paragraph</p>
+            </blockquote>
+            ` + '\n',
+        );
+
+        expect(parse(markup)).toMatchSnapshot();
     });
 
     it('should not add assets to meta if no yfm-quote-link is found', () => {
