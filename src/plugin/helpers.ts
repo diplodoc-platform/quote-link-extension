@@ -58,3 +58,6 @@ export function matchLinkAtInlineStart(inlineToken: MdIt.Token) {
 
     return null;
 }
+
+export const cloneToken = (token: MdIt.Token) =>
+    Object.assign(Object.create(Object.getPrototypeOf(token)), token);
