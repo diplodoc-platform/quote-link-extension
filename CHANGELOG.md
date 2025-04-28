@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/diplodoc-platform/quote-link-extension/compare/v0.1.2...v0.1.3) (2025-04-28)
+
+
+### Bug Fixes
+
+* **plugin:** move rest quote contents to the separate paragraph ([#10](https://github.com/diplodoc-platform/quote-link-extension/issues/10)) ([084b507](https://github.com/diplodoc-platform/quote-link-extension/commit/084b50772636164fa7c46d2d6b6cdcff46699975))
+
 ## [0.1.2](https://github.com/diplodoc-platform/quote-link-extension/compare/v0.1.1...v0.1.2) (2025-04-16)
 
 
