@@ -1,17 +1,28 @@
 import type MdIt from 'markdown-it';
 
+export type TokenMatch = {
+    openToken: MdIt.Token;
+    closeToken: MdIt.Token;
+    closeTokenIndex: number;
+};
+
 const matchCloseToken = (tokens: MdIt.Token[], i: number) => {
-    return tokens[i].type === 'blockquote_close';
+    return tokens[i]?.type === 'blockquote_close';
 };
 
 const matchOpenToken = (tokens: MdIt.Token[], i: number) => {
-    return tokens[i].type === 'blockquote_open';
+    return tokens[i]?.type === 'blockquote_open';
 };
 
-export function matchBlockquote(
-    tokens: MdIt.Token[],
-    idx: number,
-): {openToken: MdIt.Token; closeToken: MdIt.Token; closeTokenIndex: number} | null {
+/**
+ * Matches a blockquote token pair starting at the given index.
+ * Handles nested blockquotes correctly.
+ *
+ * @param tokens - Array of markdown-it tokens
+ * @param idx - Starting index to check for blockquote
+ * @returns TokenMatch with open/close tokens and close index, or null if not found
+ */
+export function matchBlockquote(tokens: MdIt.Token[], idx: number): TokenMatch | null {
     if (!matchOpenToken(tokens, idx)) {
         return null;
     }
@@ -38,9 +49,13 @@ export function matchBlockquote(
     return null;
 }
 
-export function matchLinkAtInlineStart(
-    inlineToken: MdIt.Token,
-): {openToken: MdIt.Token; closeToken: MdIt.Token; closeTokenIndex: number} | null {
+/**
+ * Checks if an inline token starts with a link and returns the link token match.
+ *
+ * @param inlineToken - The inline token to check
+ * @returns TokenMatch with link open/close tokens and close index, or null if not found
+ */
+export function matchLinkAtInlineStart(inlineToken: MdIt.Token): TokenMatch | null {
     if (inlineToken.type !== 'inline' || !inlineToken.children?.length) {
         return null;
     }
@@ -64,5 +79,11 @@ export function matchLinkAtInlineStart(
     return null;
 }
 
+/**
+ * Creates a shallow copy of a markdown-it token.
+ *
+ * @param token - The token to clone
+ * @returns A new token object with the same properties
+ */
 export const cloneToken = (token: MdIt.Token) =>
     Object.assign(Object.create(Object.getPrototypeOf(token)), token);

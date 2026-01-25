@@ -51,6 +51,14 @@ type InputOptions = {
     destRoot: string;
 };
 
+/**
+ * Creates a MarkdownIt plugin for quote link extension.
+ *
+ * @param options - Configuration options for the plugin
+ * @param options.runtime - Runtime script and style paths (string or object with script/style)
+ * @param options.bundle - Whether to bundle runtime files (default: true)
+ * @returns MarkdownIt plugin with collect method
+ */
 export function transform(options: Partial<TransformOptions> = {}) {
     const {bundle = true} = options;
 
