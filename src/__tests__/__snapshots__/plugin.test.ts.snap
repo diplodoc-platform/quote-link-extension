@@ -1,10 +1,10 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Quote link extension - plugin should create separate paragraph for the quote link if it has other paragraphs 1`] = `
-[
+exports[`Quote link extension - plugin > should create separate paragraph for the quote link if it has other paragraphs 1`] = `
+Array [
   Token {
-    "attrs": [
-      [
+    "attrs": Array [
+      Array [
         "class",
         "yfm-quote-link",
       ],
@@ -15,7 +15,7 @@ exports[`Quote link extension - plugin should create separate paragraph for the 
     "hidden": false,
     "info": "",
     "level": 0,
-    "map": [
+    "map": Array [
       0,
       4,
     ],
@@ -33,7 +33,7 @@ exports[`Quote link extension - plugin should create separate paragraph for the 
     "hidden": false,
     "info": "",
     "level": 1,
-    "map": [
+    "map": Array [
       0,
       1,
     ],
@@ -46,14 +46,14 @@ exports[`Quote link extension - plugin should create separate paragraph for the 
   Token {
     "attrs": null,
     "block": true,
-    "children": [
+    "children": Array [
       Token {
-        "attrs": [
-          [
+        "attrs": Array [
+          Array [
             "href",
             "https://ya.ru",
           ],
-          [
+          Array [
             "data-quotelink",
             "",
           ],
@@ -121,7 +121,7 @@ exports[`Quote link extension - plugin should create separate paragraph for the 
     "hidden": false,
     "info": "",
     "level": 2,
-    "map": [
+    "map": Array [
       0,
       1,
     ],
@@ -154,7 +154,7 @@ exports[`Quote link extension - plugin should create separate paragraph for the 
     "hidden": false,
     "info": "",
     "level": 1,
-    "map": [
+    "map": Array [
       2,
       3,
     ],
@@ -167,7 +167,7 @@ exports[`Quote link extension - plugin should create separate paragraph for the 
   Token {
     "attrs": null,
     "block": true,
-    "children": [
+    "children": Array [
       Token {
         "attrs": null,
         "block": false,
@@ -188,7 +188,7 @@ exports[`Quote link extension - plugin should create separate paragraph for the 
     "hidden": false,
     "info": "",
     "level": 2,
-    "map": [
+    "map": Array [
       2,
       3,
     ],
@@ -221,7 +221,7 @@ exports[`Quote link extension - plugin should create separate paragraph for the 
     "hidden": false,
     "info": "",
     "level": 1,
-    "map": [
+    "map": Array [
       3,
       4,
     ],
@@ -234,7 +234,7 @@ exports[`Quote link extension - plugin should create separate paragraph for the 
   Token {
     "attrs": null,
     "block": true,
-    "children": [
+    "children": Array [
       Token {
         "attrs": null,
         "block": false,
@@ -255,7 +255,7 @@ exports[`Quote link extension - plugin should create separate paragraph for the 
     "hidden": false,
     "info": "",
     "level": 2,
-    "map": [
+    "map": Array [
       3,
       4,
     ],
@@ -298,11 +298,11 @@ exports[`Quote link extension - plugin should create separate paragraph for the 
 ]
 `;
 
-exports[`Quote link extension - plugin should parse markup with quote link to token stream 1`] = `
-[
+exports[`Quote link extension - plugin > should parse markup with quote link to token stream 1`] = `
+Array [
   Token {
-    "attrs": [
-      [
+    "attrs": Array [
+      Array [
         "class",
         "yfm-quote-link",
       ],
@@ -313,7 +313,7 @@ exports[`Quote link extension - plugin should parse markup with quote link to to
     "hidden": false,
     "info": "",
     "level": 0,
-    "map": [
+    "map": Array [
       0,
       3,
     ],
@@ -331,7 +331,7 @@ exports[`Quote link extension - plugin should parse markup with quote link to to
     "hidden": false,
     "info": "",
     "level": 1,
-    "map": [
+    "map": Array [
       0,
       1,
     ],
@@ -344,14 +344,14 @@ exports[`Quote link extension - plugin should parse markup with quote link to to
   Token {
     "attrs": null,
     "block": true,
-    "children": [
+    "children": Array [
       Token {
-        "attrs": [
-          [
+        "attrs": Array [
+          Array [
             "href",
             "https://ya.ru",
           ],
-          [
+          Array [
             "data-quotelink",
             "true",
           ],
@@ -415,11 +415,11 @@ exports[`Quote link extension - plugin should parse markup with quote link to to
         "type": "text",
       },
     ],
-    "content": "[Quote link](https://ya.ru){data-quotelink="true"} content after qoute link",
+    "content": "[Quote link](https://ya.ru){data-quotelink=\\"true\\"} content after qoute link",
     "hidden": false,
     "info": "",
     "level": 2,
-    "map": [
+    "map": Array [
       0,
       1,
     ],
@@ -452,7 +452,7 @@ exports[`Quote link extension - plugin should parse markup with quote link to to
     "hidden": false,
     "info": "",
     "level": 1,
-    "map": [
+    "map": Array [
       2,
       3,
     ],
@@ -465,7 +465,7 @@ exports[`Quote link extension - plugin should parse markup with quote link to to
   Token {
     "attrs": null,
     "block": true,
-    "children": [
+    "children": Array [
       Token {
         "attrs": null,
         "block": false,
@@ -486,7 +486,7 @@ exports[`Quote link extension - plugin should parse markup with quote link to to
     "hidden": false,
     "info": "",
     "level": 2,
-    "map": [
+    "map": Array [
       2,
       3,
     ],

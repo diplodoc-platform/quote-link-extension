@@ -1,8 +1,9 @@
+import {describe, expect, it} from 'vitest';
 import transform from '@diplodoc/transform';
 import dd from 'ts-dedent';
 import MarkdownIt from 'markdown-it';
 
-import * as quoteLinkExtension from '../../src/plugin';
+import * as quoteLinkExtension from '../plugin';
 
 const html = (text: string, opts?: quoteLinkExtension.TransformOptions) => {
     const {result} = transform(text, {

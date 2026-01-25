@@ -9,3 +9,11 @@ node_modules
 /build
 /cache
 /coverage
+
+/external
+.lintstagedrc.js
+.eslintrc.js
+.prettierrc.js
+.stylelintrc.js
+esbuild/**/*.mjs
+scripts/**/*.mjs

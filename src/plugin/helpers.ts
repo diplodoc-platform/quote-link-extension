@@ -8,7 +8,10 @@ const matchOpenToken = (tokens: MdIt.Token[], i: number) => {
     return tokens[i].type === 'blockquote_open';
 };
 
-export function matchBlockquote(tokens: MdIt.Token[], idx: number) {
+export function matchBlockquote(
+    tokens: MdIt.Token[],
+    idx: number,
+): {openToken: MdIt.Token; closeToken: MdIt.Token; closeTokenIndex: number} | null {
     if (!matchOpenToken(tokens, idx)) {
         return null;
     }
@@ -35,7 +38,9 @@ export function matchBlockquote(tokens: MdIt.Token[], idx: number) {
     return null;
 }
 
-export function matchLinkAtInlineStart(inlineToken: MdIt.Token) {
+export function matchLinkAtInlineStart(
+    inlineToken: MdIt.Token,
+): {openToken: MdIt.Token; closeToken: MdIt.Token; closeTokenIndex: number} | null {
     if (inlineToken.type !== 'inline' || !inlineToken.children?.length) {
         return null;
     }
