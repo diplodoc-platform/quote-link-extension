@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/diplodoc-platform/quote-link-extension/compare/v0.1.3...v0.1.4) (2026-02-09)
+
+
+### Bug Fixes
+
+* update JSON import syntax from assert to with ([ae4bc77](https://github.com/diplodoc-platform/quote-link-extension/commit/ae4bc77732f9b203bb70b7eae92ff0ef86bd4889))
+
 ## [0.1.3](https://github.com/diplodoc-platform/quote-link-extension/compare/v0.1.2...v0.1.3) (2025-04-28)
 
 
