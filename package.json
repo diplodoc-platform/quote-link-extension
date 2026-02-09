@@ -1,6 +1,6 @@
 {
   "name": "@diplodoc/quote-link-extension",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Quote link extension for Diplodoc platform",
   "main": "build/plugin/index.js",
   "types": "build/plugin/index.d.ts",
