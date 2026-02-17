@@ -1,32 +1,24 @@
 import {describe, expect, it} from 'vitest';
-import transform from '@diplodoc/transform';
 import dd from 'ts-dedent';
 import MarkdownIt from 'markdown-it';
 
 import * as quoteLinkExtension from '../plugin';
 
-const html = (text: string, opts?: quoteLinkExtension.TransformOptions) => {
-    const {result} = transform(text, {
-        plugins: [
-            quoteLinkExtension.transform({bundle: false, ...opts}),
-            // disable markdown-it-attrs
-            (md) => md.core.ruler.disable('curly_attributes'),
-        ],
-    });
+const createMd = (opts?: quoteLinkExtension.TransformOptions) =>
+    new MarkdownIt().use(quoteLinkExtension.transform({bundle: false, ...opts}));
 
-    return result.html;
+const html = (text: string, opts?: quoteLinkExtension.TransformOptions) => {
+    return createMd(opts).render(text);
 };
 
 const meta = (text: string, opts?: quoteLinkExtension.TransformOptions) => {
-    const {result} = transform(text, {
-        plugins: [quoteLinkExtension.transform({bundle: false, ...opts})],
-    });
-
-    return result.meta;
+    const env: {meta?: {script?: string[]; style?: string[]}} = {};
+    createMd(opts).render(text, env);
+    return env.meta;
 };
 
 const parse = (text: string, opts?: quoteLinkExtension.TransformOptions) => {
-    const md = new MarkdownIt().use(quoteLinkExtension.transform({bundle: false, ...opts}));
+    const md = createMd(opts);
     return md.parse(text, {});
 };
 
@@ -41,7 +33,7 @@ describe('Quote link extension - plugin', () => {
         ).toBe(
             dd`
             <blockquote class="yfm-quote-link">
-            <p><a href="https://ya.ru" data-quotelink>Quote link</a></p>
+            <p><a href="https://ya.ru" data-quotelink="">Quote link</a></p>
             <p>quote link text</p>
             </blockquote>
             ` + '\n',
@@ -60,7 +52,7 @@ describe('Quote link extension - plugin', () => {
         ).toBe(
             dd`
             <blockquote class="yfm-quote-link">
-            <p><a href="https://ya.ru" data-quotelink>Quote link</a></p>
+            <p><a href="https://ya.ru" data-quotelink="">Quote link</a></p>
             <p>quote link paragraph 1</p>
             <p>quote link paragraph 2</p>
             </blockquote>
@@ -223,7 +215,7 @@ describe('Quote link extension - plugin', () => {
         ).toBe(
             dd`
             <blockquote class="yfm-quote-link">
-            <p><a href="https://ya.ru" data-quotelink>Quote link</a></p>
+            <p><a href="https://ya.ru" data-quotelink="">Quote link</a></p>
             <p>quote link text</p>
             </blockquote>
             ` + '\n',
@@ -240,7 +232,7 @@ describe('Quote link extension - plugin', () => {
         expect(html(markup)).toBe(
             dd`
             <blockquote class="yfm-quote-link">
-            <p><a href="https://ya.ru" data-quotelink>Quote link</a></p>
+            <p><a href="https://ya.ru" data-quotelink="">Quote link</a></p>
             <p>quote link first paragraph</p>
             <p>quote link second paragraph</p>
             </blockquote>
