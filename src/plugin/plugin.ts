@@ -8,15 +8,15 @@ import {ClassNames, ENV_FLAG_NAME, QUOTE_LINK_ATTR, TokenType} from './const';
 import {cloneToken, matchBlockquote, matchLinkAtInlineStart} from './helpers';
 
 /**
- * Creates a new paragraph with remaining tokens after the quote link.
- * This is used when the quote link has content after it in the same paragraph.
+ * Splits a paragraph that contains both the quote link and trailing content into two paragraphs.
+ * Inserts a new paragraph after the link and moves `restTokens` into it; updates source maps and content.
  *
- * @param tokens - Array of all tokens in the state
- * @param quoteIndex - Index of the quote open token
- * @param paragraphOpenToken - The paragraph open token
- * @param inlineToken - The inline token containing the link
- * @param restTokens - Tokens to move to the new paragraph
- * @returns void
+ * @param tokens - Full token list (mutated in place)
+ * @param quoteIndex - Index of the blockquote_open token for this quote link
+ * @param paragraphOpenToken - The paragraph_open token of the current paragraph
+ * @param inlineToken - The inline token that holds the link and the rest content
+ * @param restTokens - Inline tokens to move into the new paragraph (content after the link)
+ * @internal
  */
 function createNewParagraphWithRestTokens(
     tokens: Token[],
@@ -59,11 +59,11 @@ function createNewParagraphWithRestTokens(
 }
 
 /**
- * Quote link plugin for MarkdownIt.
- * Transforms blockquotes with data-quotelink attribute into special quote link blocks.
+ * MarkdownIt plugin that turns blockquotes into quote link blocks when the first paragraph
+ * starts with a link that has the `data-quotelink` attribute (or `{data-quotelink}` in YFM).
+ * Sets custom token types and CSS class so the block can be styled and wired to the runtime.
  *
- * @param md - MarkdownIt instance
- * @returns void
+ * @param md - MarkdownIt instance to attach the rule to
  */
 export const quoteLinkPlugin: MarkdownIt.PluginSimple = (md) => {
     const plugin: Core.RuleCore = (state) => {

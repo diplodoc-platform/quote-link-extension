@@ -1,3 +1,11 @@
+/**
+ * Defines a non-enumerable property on an object if it does not already exist.
+ *
+ * @param box - Object to attach the property to
+ * @param field - Property key
+ * @param value - Property value (used only when the property is created)
+ * @returns The same object typed with the new property
+ */
 export function hidden<B extends Record<string | symbol, unknown>, F extends string | symbol, V>(
     box: B,
     field: F,
@@ -13,12 +21,20 @@ export function hidden<B extends Record<string | symbol, unknown>, F extends str
     return box as B & {[_P in F]: V};
 }
 
+/** Paths for the quote-link runtime script and stylesheet exposed in transform result. */
 export type Runtime = {
     script: string;
     style: string;
 };
 
 declare const __dirname: string;
+
+/**
+ * Copies built runtime files (JS + CSS) to the output directory and records them in the cache.
+ *
+ * @param options - Runtime paths and output directory
+ * @param cache - Set of already-copied file paths (avoids duplicate copies)
+ */
 export function copyRuntime(
     {runtime, output}: {runtime: Runtime; output: string},
     cache: Set<string>,
@@ -38,6 +54,12 @@ export function copyRuntime(
     }
 }
 
+/**
+ * Copies a single file, creating the destination directory if needed.
+ *
+ * @param from - Source file path
+ * @param to - Destination file path
+ */
 export function copy(from: string, to: string) {
     const {mkdirSync, copyFileSync} = dynrequire('node:fs');
     const {dirname} = dynrequire('node:path');
@@ -46,9 +68,12 @@ export function copy(from: string, to: string) {
     copyFileSync(from, to);
 }
 
-/*
- * Runtime require hidden for builders.
- * Used for nodejs api
+/**
+ * Dynamically requires a Node.js module by name.
+ * Used so bundlers (e.g. esbuild) do not pull in optional dependencies at build time.
+ *
+ * @param module - Module name (e.g. `'markdown-it'`, `'node:path'`)
+ * @returns The required module
  */
 export function dynrequire(module: string) {
     // eslint-disable-next-line no-eval

@@ -7,12 +7,18 @@
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=diplodoc-platform_quote-link-extension&metric=reliability_rating)](https://sonarcloud.io/summary/overall?id=diplodoc-platform_quote-link-extension)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=diplodoc-platform_quote-link-extension&metric=security_rating)](https://sonarcloud.io/summary/overall?id=diplodoc-platform_quote-link-extension)
 
-This is an extension of the Diplodoc platform, which allows adding quote links in the documentation.
+Extension for the Diplodoc platform that adds **quote link** blocks (Markdown blockquotes with `data-quotelink`).
 
-The extension contains some parts:
+## Installation
 
-- [Prepared runtime](#prepared-runtime)
-- [MarkdownIt transform plugin](#markdownit-transform-plugin)
+```bash
+npm install @diplodoc/quote-link-extension
+```
+
+## Contents
+
+- [Prepared runtime](#prepared-runtime) — scripts and styles for the browser
+- [MarkdownIt transform plugin](#markdownit-transform-plugin) — integration with [@diplodoc/transform](https://github.com/diplodoc-platform/transform)
 
 ## Quickstart
 
@@ -59,26 +65,22 @@ import '@diplodoc/quote-link-extension/runtime';
 import '@diplodoc/quote-link-extension/runtime/styles.css';
 ```
 
-## Public css variables
+## Public CSS variables
 
-`--yfm-quote-link-background` - sets the background color for the quote link. By default `rgb(242, 242, 242)`. For the dark theme you can use `rgb(56, 52, 56)`.
-`--yfm-quote-link-background-hover` - sets the background color for the quote link on hover. By default `rgba(0, 0, 0, 0.05)`. For the dark theme you can use `rgba(255, 255, 255, 0.1)`.
+- **`--yfm-quote-link-background`** — background color of the quote link. Default: `rgb(242, 242, 242)`. For dark theme: `rgb(56, 52, 56)`.
+- **`--yfm-quote-link-background-hover`** — background on hover. Default: `rgba(0, 0, 0, 0.05)`. For dark theme: `rgba(255, 255, 255, 0.1)`.
 
 ## MarkdownIt transform plugin
 
 Plugin for [@diplodoc/transform](https://github.com/diplodoc-platform/transform) package.
 
+A blockquote is treated as a **quote link** when its first paragraph starts with a link that has the `data-quotelink` attribute (in HTML) or `{data-quotelink}` / `{data-quotelink="true"}` in YFM markup. The plugin then sets the block’s token type and CSS class (`yfm-quote-link`), and adds script/style paths to the transform result so the runtime can be loaded.
+
 Options:
 
-- `runtime.script` - name on runtime script which will be exposed in results `script` section.<br>
-  Default: `_assets/quote-link-extension.js`<br>
+- **`runtime`** — string or `{ script, style }`. Paths for script and CSS in the transform result. Default: `_assets/quote-link-extension.js` / `_assets/quote-link-extension.css`.
 
-- `runtime.style` - name on runtime css file which will be exposed in results `style` section.<br>
-  (Default: `_assets/quote-link-extension.css`)<br>
-
-- `bundle` - boolean flag to enable/disable copying of bundled runtime to target directory.<br>
-  Where target directore is `<transformer output option>/<plugin runtime option>`<br>
-  Default: `true`<br>
+- **`bundle`** — copy bundled runtime to output. Target directory: `<transformer output>/<plugin runtime option>`. Default: `true`.
 
 ## Documentation
 

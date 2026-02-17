@@ -1,26 +1,30 @@
 import type MdIt from 'markdown-it';
 
+/**
+ * Result of matching a paired token (e.g. blockquote_open + blockquote_close or link_open + link_close).
+ */
 export type TokenMatch = {
+    /** Opening token of the pair. */
     openToken: MdIt.Token;
+    /** Closing token of the pair. */
     closeToken: MdIt.Token;
+    /** Index of the closing token in the token array. */
     closeTokenIndex: number;
 };
 
-const matchCloseToken = (tokens: MdIt.Token[], i: number) => {
-    return tokens[i]?.type === 'blockquote_close';
-};
+/** @internal */
+const matchCloseToken = (tokens: MdIt.Token[], i: number) => tokens[i]?.type === 'blockquote_close';
 
-const matchOpenToken = (tokens: MdIt.Token[], i: number) => {
-    return tokens[i]?.type === 'blockquote_open';
-};
+/** @internal */
+const matchOpenToken = (tokens: MdIt.Token[], i: number) => tokens[i]?.type === 'blockquote_open';
 
 /**
- * Matches a blockquote token pair starting at the given index.
- * Handles nested blockquotes correctly.
+ * Finds a blockquote token pair starting at the given index.
+ * Correctly skips nested blockquotes so the returned close token matches the open at `idx`.
  *
- * @param tokens - Array of markdown-it tokens
- * @param idx - Starting index to check for blockquote
- * @returns TokenMatch with open/close tokens and close index, or null if not found
+ * @param tokens - Full list of markdown-it block tokens
+ * @param idx - Index at which to look for a blockquote_open
+ * @returns Match with open token, close token, and close index, or null if no valid pair
  */
 export function matchBlockquote(tokens: MdIt.Token[], idx: number): TokenMatch | null {
     if (!matchOpenToken(tokens, idx)) {
@@ -50,10 +54,10 @@ export function matchBlockquote(tokens: MdIt.Token[], idx: number): TokenMatch |
 }
 
 /**
- * Checks if an inline token starts with a link and returns the link token match.
+ * If the inline token’s first child is a link, returns the link_open/link_close pair and close index.
  *
- * @param inlineToken - The inline token to check
- * @returns TokenMatch with link open/close tokens and close index, or null if not found
+ * @param inlineToken - Inline token (e.g. contents of a paragraph) to inspect
+ * @returns Match with link open/close tokens and close index, or null if not starting with a link
  */
 export function matchLinkAtInlineStart(inlineToken: MdIt.Token): TokenMatch | null {
     if (inlineToken.type !== 'inline' || !inlineToken.children?.length) {
@@ -80,10 +84,10 @@ export function matchLinkAtInlineStart(inlineToken: MdIt.Token): TokenMatch | nu
 }
 
 /**
- * Creates a shallow copy of a markdown-it token.
+ * Shallow-copies a markdown-it token (same prototype, same own properties).
  *
- * @param token - The token to clone
- * @returns A new token object with the same properties
+ * @param token - Token to clone
+ * @returns New token instance with identical properties
  */
 export const cloneToken = (token: MdIt.Token) =>
     Object.assign(Object.create(Object.getPrototypeOf(token)), token);
