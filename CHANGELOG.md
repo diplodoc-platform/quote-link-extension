@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.5](https://github.com/diplodoc-platform/quote-link-extension/compare/v0.1.4...v0.1.5) (2026-05-28)
+
+
+### Bug Fixes
+
+* **deps:** updated node to 24 ([#28](https://github.com/diplodoc-platform/quote-link-extension/issues/28)) ([93f68fd](https://github.com/diplodoc-platform/quote-link-extension/commit/93f68fd13802243a8b4e38e7760488d319abc472))
+* Update infra to 1.14.1 ([afcc950](https://github.com/diplodoc-platform/quote-link-extension/commit/afcc95033152f3580ad4890531c3b1dfff4fd22a))
+
 ## [0.1.4](https://github.com/diplodoc-platform/quote-link-extension/compare/v0.1.3...v0.1.4) (2026-02-09)
 
 
