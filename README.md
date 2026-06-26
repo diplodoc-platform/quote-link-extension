@@ -1,11 +1,15 @@
-# Diplodoc quote link extension
+**english** | [русский](https://github.com/diplodoc-platform/quote-link-extension/blob/master/README.ru.md)
+
+---
 
 [![NPM version](https://img.shields.io/npm/v/@diplodoc/quote-link-extension.svg?style=flat)](https://www.npmjs.org/package/@diplodoc/quote-link-extension)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=diplodoc-platform_quote-link-extension&metric=alert_status)](https://sonarcloud.io/summary/overall?id=diplodoc-platform_quote-link-extension)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=diplodoc-platform_quote-link-extension&metric=coverage)](https://sonarcloud.io/summary/overall?id=diplodoc-platform_quote-link-extension)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=diplodoc-platform_quote-link-extension&metric=sqale_rating)](https://sonarcloud.io/summary/overall?id=diplodoc-platform_quote-link-extension)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=diplodoc-platform_quote-link-extension&metric=reliability_rating)](https://sonarcloud.io/summary/overall?id=diplodoc-platform_quote-link-extension)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=diplodoc-platform_quote-link-extension&metric=security_rating)](https://sonarcloud.io/summary/overall?id=diplodoc-platform_quote-link-extension)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=diplodoc-platform_quote-link-extension&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=diplodoc-platform_quote-link-extension)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=diplodoc-platform_quote-link-extension&metric=coverage)](https://sonarcloud.io/summary/new_code?id=diplodoc-platform_quote-link-extension)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=diplodoc-platform_quote-link-extension&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=diplodoc-platform_quote-link-extension)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=diplodoc-platform_quote-link-extension&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=diplodoc-platform_quote-link-extension)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=diplodoc-platform_quote-link-extension&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=diplodoc-platform_quote-link-extension)
+
+# Diplodoc quote link extension
 
 Extension for the Diplodoc platform that adds **quote link** blocks (Markdown blockquotes with `data-quotelink`).
 
