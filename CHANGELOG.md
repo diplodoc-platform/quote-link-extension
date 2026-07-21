@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.7](https://github.com/diplodoc-platform/quote-link-extension/compare/v0.1.6...v0.1.7) (2026-07-21)
+
+
+### Bug Fixes
+
+* **deps:** Update @diplodoc/utils@2.3.5 ([#39](https://github.com/diplodoc-platform/quote-link-extension/issues/39)) ([7dc3d1e](https://github.com/diplodoc-platform/quote-link-extension/commit/7dc3d1e06fcb8a95c55991c9dbc0af1b4bdf3c7c))
+
 ## [0.1.6](https://github.com/diplodoc-platform/quote-link-extension/compare/v0.1.5...v0.1.6) (2026-05-28)
 
 
