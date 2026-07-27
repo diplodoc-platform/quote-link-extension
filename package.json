@@ -35,7 +35,7 @@
     "build"
   ],
   "scripts": {
-    "build": "npm run build:clean && run-p build:*",
+    "build": "npm run build:clean && run-p build:js build:declarations",
     "build:clean": "node scripts/clean.mjs",
     "build:js": "node esbuild/build.mjs",
     "build:declarations": "tsc -p tsconfig.publish.json --emitDeclarationOnly --outDir ./build",
