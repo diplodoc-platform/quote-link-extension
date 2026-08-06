@@ -1,5 +1,16 @@
 {
   "extends": "./tsconfig.json",
   "include": ["src"],
-  "exclude": ["node_modules", "build", "tests", "**/__tests__/**", "**/__snapshots__/**", "**/*.test.*", "**/*.spec.*"]
+  "exclude": [
+    "node_modules",
+    "build",
+    "tests",
+    "**/__tests__/**",
+    "**/__snapshots__/**",
+    "**/*.test.*",
+    "**/*.spec.*"
+  ],
+  "compilerOptions": {
+    "rootDir": "./src"
+  }
 }
