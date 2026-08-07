@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.8](https://github.com/diplodoc-platform/quote-link-extension/compare/v0.1.7...v0.1.8) (2026-08-07)
+
+
+### Bug Fixes
+
+* exclude build:clean from the parallel build glob ([#41](https://github.com/diplodoc-platform/quote-link-extension/issues/41)) ([dc133d0](https://github.com/diplodoc-platform/quote-link-extension/commit/dc133d0b15c6e75a85e05797e55faf949a050f04))
+* Upgrade typescript to 5.9.3 DOCSTOOLS-6357 ([356885e](https://github.com/diplodoc-platform/quote-link-extension/commit/356885eb522f4c6c5310f9aeca9e8b2f7fd84a80))
+* Upgrade typescript to 6.0.3 DOCSTOOLS-6359 ([7adda9e](https://github.com/diplodoc-platform/quote-link-extension/commit/7adda9ef18395a963750e8974cf79115c7317607))
+
 ## [0.1.7](https://github.com/diplodoc-platform/quote-link-extension/compare/v0.1.6...v0.1.7) (2026-07-21)
 
 
