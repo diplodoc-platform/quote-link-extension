@@ -1,4 +1,5 @@
-import type MarkdownIt from 'markdown-it';
+import type MarkdownItConstructor from 'markdown-it';
+import type {Env, MarkdownIt} from 'markdown-it';
 
 import {quoteLinkPlugin} from './plugin';
 import {type Runtime, copyRuntime, dynrequire, hidden} from './utils';
@@ -26,10 +27,9 @@ type NormalizedPluginOptions = Omit<TransformOptions, 'runtime'> & {
     runtime: Runtime;
 };
 
-/**
- * Registers the quote link rule and the after-ruler that fills env.meta and optionally copies runtime.
- * @internal
- */
+type RuntimeEnv = Env & {meta?: {script?: string[]; style?: string[]}};
+
+// Registers the quote link rule and the after-ruler that fills env.meta and optionally copies runtime.
 const registerTransform = (
     md: MarkdownIt,
     {
@@ -42,8 +42,8 @@ const registerTransform = (
 ) => {
     md.use(quoteLinkPlugin);
 
-    md.core.ruler.push('yfm_quote-link_after', ({env}) => {
-        hidden(env, 'bundled', new Set<string>());
+    md.core.ruler.push('yfm_quote-link_after', ({env}: {env: RuntimeEnv}) => {
+        const runtimeEnv = hidden(env, 'bundled', new Set<string>());
 
         if (env?.[ENV_FLAG_NAME]) {
             env.meta = env.meta || {};
@@ -53,7 +53,7 @@ const registerTransform = (
             env.meta.style.push(runtime.style);
 
             if (bundle) {
-                copyRuntime({runtime, output}, env.bundled);
+                copyRuntime({runtime, output}, runtimeEnv.bundled);
             }
         }
     });
@@ -87,10 +87,7 @@ export function transform(options: Partial<TransformOptions> = {}) {
                   style: '_assets/quote-link-extension.css',
               };
 
-    const plugin: MarkdownIt.PluginWithOptions<{output?: string}> = function (
-        md: MarkdownIt,
-        {output = '.'} = {},
-    ) {
+    const plugin = function (md: MarkdownIt, {output = '.'}: {output?: string} = {}) {
         registerTransform(md, {
             runtime,
             bundle,
@@ -98,9 +95,9 @@ export function transform(options: Partial<TransformOptions> = {}) {
         });
     };
 
-    Object.assign(plugin, {
+    return Object.assign(plugin, {
         collect(input: string, {destRoot = '.'}: InputOptions) {
-            const MdIt = dynrequire('markdown-it');
+            const MdIt: typeof MarkdownItConstructor = dynrequire('markdown-it');
             const md = new MdIt().use((md: MarkdownIt) => {
                 registerTransform(md, {
                     runtime,
@@ -112,6 +109,4 @@ export function transform(options: Partial<TransformOptions> = {}) {
             md.parse(input, {});
         },
     });
-
-    return plugin;
 }

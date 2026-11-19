@@ -1,22 +1,20 @@
-import type MdIt from 'markdown-it';
+import type {Token} from 'markdown-it';
 
 /**
  * Result of matching a paired token (e.g. blockquote_open + blockquote_close or link_open + link_close).
  */
 export type TokenMatch = {
     /** Opening token of the pair. */
-    openToken: MdIt.Token;
+    openToken: Token;
     /** Closing token of the pair. */
-    closeToken: MdIt.Token;
+    closeToken: Token;
     /** Index of the closing token in the token array. */
     closeTokenIndex: number;
 };
 
-/** @internal */
-const matchCloseToken = (tokens: MdIt.Token[], i: number) => tokens[i]?.type === 'blockquote_close';
+const matchCloseToken = (tokens: Token[], i: number) => tokens[i]?.type === 'blockquote_close';
 
-/** @internal */
-const matchOpenToken = (tokens: MdIt.Token[], i: number) => tokens[i]?.type === 'blockquote_open';
+const matchOpenToken = (tokens: Token[], i: number) => tokens[i]?.type === 'blockquote_open';
 
 /**
  * Finds a blockquote token pair starting at the given index.
@@ -26,7 +24,7 @@ const matchOpenToken = (tokens: MdIt.Token[], i: number) => tokens[i]?.type === 
  * @param idx - Index at which to look for a blockquote_open
  * @returns Match with open token, close token, and close index, or null if no valid pair
  */
-export function matchBlockquote(tokens: MdIt.Token[], idx: number): TokenMatch | null {
+export function matchBlockquote(tokens: Token[], idx: number): TokenMatch | null {
     if (!matchOpenToken(tokens, idx)) {
         return null;
     }
@@ -59,7 +57,7 @@ export function matchBlockquote(tokens: MdIt.Token[], idx: number): TokenMatch |
  * @param inlineToken - Inline token (e.g. contents of a paragraph) to inspect
  * @returns Match with link open/close tokens and close index, or null if not starting with a link
  */
-export function matchLinkAtInlineStart(inlineToken: MdIt.Token): TokenMatch | null {
+export function matchLinkAtInlineStart(inlineToken: Token): TokenMatch | null {
     if (inlineToken.type !== 'inline' || !inlineToken.children?.length) {
         return null;
     }
@@ -89,5 +87,5 @@ export function matchLinkAtInlineStart(inlineToken: MdIt.Token): TokenMatch | nu
  * @param token - Token to clone
  * @returns New token instance with identical properties
  */
-export const cloneToken = (token: MdIt.Token) =>
+export const cloneToken = (token: Token) =>
     Object.assign(Object.create(Object.getPrototypeOf(token)), token);

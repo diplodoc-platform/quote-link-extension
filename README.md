@@ -19,6 +19,8 @@ Extension for the Diplodoc platform that adds **quote link** blocks (Markdown bl
 npm install @diplodoc/quote-link-extension
 ```
 
+Version 1 requires `markdown-it` ^15.0.3 for rendering and collecting resources.
+
 ## Contents
 
 - [Prepared runtime](#prepared-runtime) — scripts and styles for the browser

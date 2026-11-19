@@ -1,6 +1,4 @@
-import type MarkdownIt from 'markdown-it';
-import type Core from 'markdown-it/lib/parser_core';
-import type Token from 'markdown-it/lib/token';
+import type {MarkdownIt, StateCore, Token} from 'markdown-it';
 
 import {parseMdAttrs} from '@diplodoc/utils';
 
@@ -16,6 +14,7 @@ import {cloneToken, matchBlockquote, matchLinkAtInlineStart} from './helpers';
  * @param paragraphOpenToken - The paragraph_open token of the current paragraph
  * @param inlineToken - The inline token that holds the link and the rest content
  * @param restTokens - Inline tokens to move into the new paragraph (content after the link)
+ * @returns Nothing. The token list is updated in place.
  * @internal
  */
 function createNewParagraphWithRestTokens(
@@ -64,9 +63,10 @@ function createNewParagraphWithRestTokens(
  * Sets custom token types and CSS class so the block can be styled and wired to the runtime.
  *
  * @param md - MarkdownIt instance to attach the rule to
+ * @returns Nothing. The rule is registered on the supplied parser.
  */
-export const quoteLinkPlugin: MarkdownIt.PluginSimple = (md) => {
-    const plugin: Core.RuleCore = (state) => {
+export const quoteLinkPlugin = (md: MarkdownIt) => {
+    const plugin = (state: StateCore) => {
         const {tokens} = state;
 
         for (let i = 0; i < tokens.length; i++) {
