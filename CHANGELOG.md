@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/diplodoc-platform/quote-link-extension/compare/v0.1.8...v1.0.0) (2026-11-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* **markdown-it:** Quote Link plugin hosts must use Markdown-it 15.0.3 or newer within major 15. The plugin exposes its existing resource collector with native Markdown-it types.
+
+### Features
+
+* **markdown-it:** require Markdown-it 15 ([a9982d7](https://github.com/diplodoc-platform/quote-link-extension/commit/a9982d774cac132d6fd18d25f52d5b5573c5085a))
+
 ## [0.1.8](https://github.com/diplodoc-platform/quote-link-extension/compare/v0.1.7...v0.1.8) (2026-08-07)
 
 
